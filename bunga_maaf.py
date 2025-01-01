@@ -37,8 +37,8 @@ lyrics = [
     ("♪ Tanpa hadirmu", 5.5),
     ("♪ Keras hati yang dulu bicara", 7.0),
     ("♪ Berujung pilu", 6.0),
-    ("♪ .......", 1.0),
-    ("♪ Andai Angin mengulang", 4.5),
+    ("♪ .......", 1.5),
+    ("♪ Andai Angin mengulang", 4.0),
     ("♪ Sebuah masa yang t'lah usang", 5.0),
     ("♪ Kan ku telan isi bumi hanya untukmu", 6.0),
     ("♪ Terima bunga maafku", 3.5),
@@ -81,18 +81,25 @@ lyrics = [
     ("♪ .......", 4.0),
     ("♪ .......", 4.0),
     ("♪ .......", 4.0),
+    ("♪ .......", 4.0),
+    ("♪ .......", 4.0),
+    ("♪ .......", 4.0),
+    ("♪ .......", 4.0),
+    ("♪ .......", 2.0),
 ]
 
 running = True
-while running:
+pygame.mixer.music.play()
+
+for lyric, duration in lyrics:
+    if not running:  
+        break
+    display_text(lyric, duration)
+
+while pygame.mixer.music.get_busy() and running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    
-    for lyric, duration in lyrics:
-        display_text(lyric, duration)
-        
-    if not pygame.mixer.music.get_busy():
-        running = False
-            
+            pygame.mixer.music.stop()
+
 pygame.quit()
